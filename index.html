@@ -86,8 +86,8 @@
 
   <div class="card">
     <p>
-      Meu amor, hoje você completa 18 anos, e é um dia muito especial. Minha princesa, eu amo você,
-      amo cada detalhe em você. Obrigado por me fazer tão feliz.
+      Meu amor, hoje você completa 18 anos, e é um dia muito especial.
+      Obrigado por existir e por me fazer tão feliz.
       Feliz aniversário, minha noiva linda. 💕
     </p>
   </div>
@@ -107,6 +107,15 @@
     </div>
   </div>
 
+  <!-- 🎥 VÍDEO (VOLTOU) -->
+  <div class="card">
+    <h2>🎥 Um dos melhores momentos contigo</h2>
+    <video controls playsinline style="width:100%; border-radius:20px;">
+      <source src="./video.mp4" type="video/mp4">
+      Seu navegador não suporta vídeo.
+    </video>
+  </div>
+
   <div class="card">
     <h2>🎶 Nossa Música</h2>
     <button onclick="playMusic()">Tocar Música ❤️</button>
@@ -115,12 +124,10 @@
 
   <script>
     const music = document.getElementById("music");
-    music.volume = 0.2; // 🔈 volume baixinho (20%)
+    music.volume = 0.2; // volume baixinho
 
-    // tenta tocar automaticamente ao carregar
     window.addEventListener("load", () => {
       music.play().catch(() => {
-        // se o navegador bloquear, toca no primeiro toque/scroll
         document.body.addEventListener("click", () => music.play(), { once: true });
       });
     });
