@@ -34,6 +34,14 @@
       backdrop-filter: blur(5px);
     }
 
+    /* 💌 CARTA */
+    #typewriter {
+      font-size: 1.2em;
+      line-height: 1.6em;
+      white-space: pre-wrap;
+      min-height: 120px;
+    }
+
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -72,7 +80,6 @@
         transform: translateY(0);
         opacity: 1;
       }
-
       to {
         transform: translateY(-100vh);
         opacity: 0;
@@ -99,22 +106,26 @@
   </div>
 
   <div class="card">
+    <h2>💌 Uma carta só pra você</h2>
+    <p id="typewriter"></p>
+  </div>
+
+  <div class="card">
     <h2>📸 EU TE AMO</h2>
-   <div class="gallery">
-  <img src="./meuamor/foto1.jpg" alt="Nós dois">
-  <img src="./meuamor/foto2.jpg" alt="Momentos especiais">
-  <img src="./meuamor/foto3.jpg" alt="Te amo">
-  <img src="./meuamor/foto4.jpg" alt="Para sempre">
-</div>
+    <div class="gallery">
+      <img src="./meuamor/foto1.jpg" alt="Nós dois">
+      <img src="./meuamor/foto2.jpg" alt="Momentos especiais">
+      <img src="./meuamor/foto3.jpg" alt="Te amo">
+      <img src="./meuamor/foto4.jpg" alt="Para sempre">
+    </div>
 
     <div class="card">
-  <h2>🎥 Um dos melhores momentos contigo</h2>
-  <video controls playsinline style="width:100%; border-radius:20px;">
-    <source src="./video.mp4" type="video/mp4">
-    Seu navegador não suporta vídeo.
-  </video>
-</div>
-
+      <h2>🎥 Um dos melhores momentos contigo</h2>
+      <video controls playsinline style="width:100%; border-radius:20px;">
+        <source src="./video.mp4" type="video/mp4">
+        Seu navegador não suporta vídeo.
+      </video>
+    </div>
   </div>
 
   <div class="card">
@@ -142,11 +153,37 @@
     }
 
     setInterval(createHeart, 400);
+
+    /* 💌 EFEITO DE CARTA */
+    const text = `
+Meu amor...
+
+Desde o dia em que você entrou na minha vida,
+tudo ganhou mais cor, mais sentido e mais amor.
+
+Cada sorriso seu é um motivo pra eu continuar,
+cada abraço é um lugar seguro,
+e cada momento contigo é um presente.
+
+Você não é só parte da minha vida.
+Você é o meu futuro.
+Eu te amo mais do que palavras conseguem explicar. 💖
+`;
+
+    let index = 0;
+    const speed = 45;
+    const element = document.getElementById("typewriter");
+
+    function typeWriter() {
+      if (index < text.length) {
+        element.innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+
+    typeWriter();
   </script>
 
 </body>
-
-
 </html>
-
-
