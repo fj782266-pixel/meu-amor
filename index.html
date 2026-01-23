@@ -7,14 +7,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #6005f3, #ffc371);
-      color: white;
-      text-align: center;
-      overflow-x: hidden;
-    }
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #6005f3, #ffc371);
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+#contador-amor {
+  margin-top: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+#contador-amor h3 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+#contador-amor p {
+  font-size: 16px;
+  font-weight: bold;
+}
+</style>
+
 
     h1 {
       margin-top: 30px;
@@ -115,6 +133,11 @@
       Seu navegador não suporta vídeo.
     </video>
   </div>
+  <!-- contador de dias) -->
+<div id="contador-amor">
+  <h3>💖 Nosso tempo juntos 💖</h3>
+  <p id="tempo"></p>
+</div>
 
   <div class="card">
     <h2>🎶 Nossa Música</h2>
@@ -172,6 +195,42 @@ Eu te amo mais do que palavras conseguem explicar. 💖
 
     typeWriter();
   </script>
+<script>
+function atualizarContador() {
+  const inicio = new Date(2022, 5, 10, 0, 0, 0); // ANO, MES-1, DIA
+  const agora = new Date();
+
+  let anos = agora.getFullYear() - inicio.getFullYear();
+  let meses = agora.getMonth() - inicio.getMonth();
+  let dias = agora.getDate() - inicio.getDate();
+
+  if (dias < 0) {
+    meses--;
+    const ultimoMes = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
+    dias += ultimoMes;
+  }
+
+  if (meses < 0) {
+    anos--;
+    meses += 12;
+  }
+
+  const diff = agora - inicio;
+  const segundosTotais = Math.floor(diff / 1000);
+
+  const horas = Math.floor((segundosTotais % 86400) / 3600);
+  const minutos = Math.floor((segundosTotais % 3600) / 60);
+  const segundos = segundosTotais % 60;
+
+  document.getElementById("tempo").innerHTML =
+    `${anos} anos, ${meses} meses, ${dias} dias<br>
+     ${horas} horas, ${minutos} minutos e ${segundos} segundos 💕`;
+}
+
+setInterval(atualizarContador, 1000);
+atualizarContador();
+</script>
 
 </body>
 </html>
+
