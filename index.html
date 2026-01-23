@@ -1,38 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <title>Para o Amor da Minha Vida 💖</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #6005f3, #ffc371);
-  color: white;
-  text-align: center;
-  overflow-x: hidden;
-}
-
-#contador-amor {
-  margin-top: 20px;
-  text-align: center;
-  color: #fff;
-}
-
-#contador-amor h3 {
-  font-size: 18px;
-  margin-bottom: 6px;
-}
-
-#contador-amor p {
-  font-size: 16px;
-  font-weight: bold;
-}
-</style>
-
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #6005f3, #ffc371);
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
 
     h1 {
       margin-top: 30px;
@@ -83,6 +64,20 @@ body {
       margin-top: 15px;
     }
 
+    #contador-amor {
+      margin-top: 20px;
+    }
+
+    #contador-amor h3 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    #contador-amor p {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
     .heart {
       position: fixed;
       bottom: -20px;
@@ -125,19 +120,20 @@ body {
     </div>
   </div>
 
-  <!-- 🎥 VÍDEO (VOLTOU) -->
+  <!-- 🎥 VÍDEO + CONTADOR -->
   <div class="card">
     <h2>🎥 Um dos melhores momentos contigo</h2>
+
     <video controls playsinline style="width:100%; border-radius:20px;">
       <source src="./video.mp4" type="video/mp4">
       Seu navegador não suporta vídeo.
     </video>
+
+    <div id="contador-amor">
+      <h3>💖 Nosso tempo juntos 💖</h3>
+      <p id="tempo"></p>
+    </div>
   </div>
-  <!-- contador de dias) -->
-<div id="contador-amor">
-  <h3>💖 Nosso tempo juntos 💖</h3>
-  <p id="tempo"></p>
-</div>
 
   <div class="card">
     <h2>🎶 Nossa Música</h2>
@@ -146,8 +142,9 @@ body {
   </div>
 
   <script>
+    /* 🎵 Música */
     const music = document.getElementById("music");
-    music.volume = 0.2; // volume baixinho
+    music.volume = 0.2;
 
     window.addEventListener("load", () => {
       music.play().catch(() => {
@@ -159,18 +156,20 @@ body {
       music.play();
     }
 
+    /* ❤️ Corações */
     function createHeart() {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.innerHTML = '❤️';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 6000);
     }
 
     setInterval(createHeart, 400);
 
+    /* ✍️ Máquina de escrever */
     const text = `
 Meu amor...
 
@@ -180,7 +179,6 @@ tudo ganhou mais cor, mais sentido e mais amor.
 Você é o meu futuro.
 Eu te amo mais do que palavras conseguem explicar. 💖
 `;
-
     let index = 0;
     const speed = 80;
     const element = document.getElementById("typewriter");
@@ -192,46 +190,42 @@ Eu te amo mais do que palavras conseguem explicar. 💖
         setTimeout(typeWriter, speed);
       }
     }
-
     typeWriter();
+
+    /* ⏱️ Contador do amor */
+    function atualizarContador() {
+      const inicio = new Date(2023, 5, 21, 0, 0, 0); // ANO, MES-1, DIA
+      const agora = new Date();
+
+      let anos = agora.getFullYear() - inicio.getFullYear();
+      let meses = agora.getMonth() - inicio.getMonth();
+      let dias = agora.getDate() - inicio.getDate();
+
+      if (dias < 0) {
+        meses--;
+        const ultimoMes = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
+        dias += ultimoMes;
+      }
+
+      if (meses < 0) {
+        anos--;
+        meses += 12;
+      }
+
+      const diff = agora - inicio;
+      const segundosTotais = Math.floor(diff / 1000);
+      const horas = Math.floor((segundosTotais % 86400) / 3600);
+      const minutos = Math.floor((segundosTotais % 3600) / 60);
+      const segundos = segundosTotais % 60;
+
+      document.getElementById("tempo").innerHTML =
+        `${anos} anos, ${meses} meses, ${dias} dias<br>
+         ${horas} horas, ${minutos} minutos e ${segundos} segundos 💕`;
+    }
+
+    setInterval(atualizarContador, 1000);
+    atualizarContador();
   </script>
-<script>
-function atualizarContador() {
-  const inicio = new Date(2023, 5, 21, 0, 0, 0); // ANO, MES-1, DIA
-  const agora = new Date();
-
-  let anos = agora.getFullYear() - inicio.getFullYear();
-  let meses = agora.getMonth() - inicio.getMonth();
-  let dias = agora.getDate() - inicio.getDate();
-
-  if (dias < 0) {
-    meses--;
-    const ultimoMes = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
-    dias += ultimoMes;
-  }
-
-  if (meses < 0) {
-    anos--;
-    meses += 12;
-  }
-
-  const diff = agora - inicio;
-  const segundosTotais = Math.floor(diff / 1000);
-
-  const horas = Math.floor((segundosTotais % 86400) / 3600);
-  const minutos = Math.floor((segundosTotais % 3600) / 60);
-  const segundos = segundosTotais % 60;
-
-  document.getElementById("tempo").innerHTML =
-    `${anos} anos, ${meses} meses, ${dias} dias<br>
-     ${horas} horas, ${minutos} minutos e ${segundos} segundos 💕`;
-}
-
-setInterval(atualizarContador, 1000);
-atualizarContador();
-</script>
 
 </body>
 </html>
-
-
