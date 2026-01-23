@@ -84,6 +84,26 @@
       color: #6005f3;
       font-size: 20px;
       animation: float 6s linear infinite;
+      cursor: pointer;
+    }
+
+    #mensagem-amor {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      padding: 15px 25px;
+      border-radius: 20px;
+      font-size: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    #mensagem-amor.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-10px);
     }
 
     @keyframes float {
@@ -120,7 +140,6 @@
     </div>
   </div>
 
-  <!-- 🎥 VÍDEO + CONTADOR -->
   <div class="card">
     <h2>🎥 Um dos melhores momentos contigo</h2>
 
@@ -141,6 +160,9 @@
     <audio id="music" src="musica.mp3" loop></audio>
   </div>
 
+  <!-- Caixa de mensagem dos corações -->
+  <div id="mensagem-amor"></div>
+
   <script>
     /* 🎵 Música */
     const music = document.getElementById("music");
@@ -156,6 +178,30 @@
       music.play();
     }
 
+    /* ❤️ Mensagens especiais */
+    const mensagens = [
+      "Eu te amo mais do que tudo ❤️",
+      "Você é o melhor presente da minha vida 💖",
+      "Meu coração é todo seu 💕",
+      "Cada segundo contigo vale a pena ✨",
+      "Você é meu para sempre 💍",
+      "Obrigado por existir, meu amor 😍",
+      "Nosso amor é infinito ♾️",
+      "Com você, tudo faz sentido 💫"
+    ];
+
+    function mostrarMensagem() {
+      const box = document.getElementById("mensagem-amor");
+      const msg = mensagens[Math.floor(Math.random() * mensagens.length)];
+
+      box.textContent = msg;
+      box.classList.add("show");
+
+      setTimeout(() => {
+        box.classList.remove("show");
+      }, 3000);
+    }
+
     /* ❤️ Corações */
     function createHeart() {
       const heart = document.createElement("div");
@@ -163,6 +209,9 @@
       heart.innerHTML = "❤️";
       heart.style.left = Math.random() * 100 + "vw";
       heart.style.fontSize = Math.random() * 20 + 15 + "px";
+
+      heart.addEventListener("click", mostrarMensagem);
+
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 6000);
     }
@@ -194,7 +243,7 @@ Eu te amo mais do que palavras conseguem explicar. 💖
 
     /* ⏱️ Contador do amor */
     function atualizarContador() {
-      const inicio = new Date(2023, 5, 21, 0, 0, 0); // ANO, MES-1, DIA
+      const inicio = new Date(2023, 5, 21, 0, 0, 0);
       const agora = new Date();
 
       let anos = agora.getFullYear() - inicio.getFullYear();
