@@ -1,105 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Para o Amor da Minha Vida 💖</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Para o Amor da Minha Vida 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #6005f3, #ffc371);
-      color: white;
-      text-align: center;
-      overflow-x: hidden;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #6005f3, #ffc371);
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
 
-    h1 {
-      margin-top: 30px;
-      font-size: 2.2em;
-    }
+h1 { margin-top: 30px; font-size: 2.2em; }
+p { font-size: 1.2em; padding: 0 20px; }
 
-    p {
-      font-size: 1.2em;
-      padding: 0 20px;
-    }
+.card {
+  background: rgba(255,255,255,0.15);
+  margin: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+}
 
-    .card {
-      background: rgba(255, 255, 255, 0.15);
-      margin: 20px;
-      padding: 20px;
-      border-radius: 20px;
-      backdrop-filter: blur(5px);
-    }
+#contador-amor h3 { font-size: 18px; }
+#contador-amor p { font-size: 16px; font-weight: bold; }
 
-    #typewriter {
-      font-size: 1.2em;
-      line-height: 1.6em;
-      white-space: pre-wrap;
-      min-height: 120px;
-    }
+button {
+  background: #6005f3;
+  border: none;
+  padding: 15px 25px;
+  color: white;
+  border-radius: 30px;
+  cursor: pointer;
+}
 
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 10px;
-      padding: 10px;
-    }
+/* ❤️ Corações */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  color: #ff2f92;
+  animation: float 6s linear infinite;
+  cursor: pointer;
+}
 
-    .gallery img {
-      width: 100%;
-      border-radius: 15px;
-      object-fit: cover;
-    }
+@keyframes float {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-100vh); opacity: 0; }
+}
 
-    button {
-      background: #6005f3;
-      border: none;
-      padding: 15px 25px;
-      color: white;
-      font-size: 1em;
-      border-radius: 30px;
-      cursor: pointer;
-      margin-top: 15px;
-    }
+/* 💬 Mensagens ao clicar */
+.mensagem {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.7);
+  padding: 15px 25px;
+  border-radius: 20px;
+  font-size: 1.2em;
+  animation: fade 3s ease forwards;
+  z-index: 999;
+}
 
-    /* ❤️ CORAÇÕES */
-    .heart {
-      position: fixed;
-      bottom: -20px;
-      color: #6005f3;
-      animation: float 6s linear infinite;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    @keyframes float {
-      from { transform: translateY(0); opacity: 1; }
-      to { transform: translateY(-100vh); opacity: 0; }
-    }
-
-    /* 💬 MENSAGEM AO CLICAR */
-    .mensagem {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0,0,0,0.8);
-      padding: 20px 30px;
-      border-radius: 20px;
-      font-size: 1.3em;
-      animation: fade 3s forwards;
-      z-index: 999;
-    }
-
-    @keyframes fade {
-      0% { opacity: 0; transform: translate(-50%, -60%); }
-      20% { opacity: 1; transform: translate(-50%, -50%); }
-      80% { opacity: 1; }
-      100% { opacity: 0; }
-    }
-  </style>
+@keyframes fade {
+  0% { opacity: 0; transform: translate(-50%, -60%); }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -80%); }
+}
+</style>
 </head>
 
 <body>
@@ -107,85 +80,37 @@
 <h1>💖 Para Você, Meu Amor 💖</h1>
 
 <div class="card">
-  <p>
-    Meu amor, hoje você completa 18 anos.
-    Obrigado por existir e por me fazer tão feliz.
-    Feliz aniversário, minha noiva linda. 💕
-  </p>
+<p>Meu amor, hoje você completa 18 anos. Obrigado por existir e por me fazer tão feliz.  
+Feliz aniversário, minha noiva linda. 💕</p>
 </div>
 
 <div class="card">
-  <h2>💌 Uma carta só pra você</h2>
-  <p id="typewriter"></p>
+<h2>🎥 Um dos melhores momentos contigo</h2>
+<video controls style="width:100%; border-radius:20px;">
+  <source src="video.mp4" type="video/mp4">
+</video>
+
+<div id="contador-amor">
+<h3>💖 Nosso tempo juntos 💖</h3>
+<p id="tempo"></p>
+</div>
 </div>
 
 <div class="card">
-  <h2>📸 EU TE AMO</h2>
-  <div class="gallery">
-    <img src="./meuamor/foto1.jpg">
-    <img src="./meuamor/foto2.jpg">
-    <img src="./meuamor/foto3.jpg">
-    <img src="./meuamor/foto4.jpg">
-  </div>
-</div>
-
-<div class="card">
-  <h2>🎥 Um dos melhores momentos contigo</h2>
-  <video controls playsinline style="width:100%; border-radius:20px;">
-    <source src="./video.mp4" type="video/mp4">
-  </video>
-
-  <h3>💖 Nosso tempo juntos 💖</h3>
-  <p id="tempo"></p>
-</div>
-
-<div class="card">
-  <h2>🎶 Nossa Música</h2>
-  <button onclick="playMusic()">Tocar Música ❤️</button>
-  <audio id="music" src="musica.mp3" loop></audio>
+<h2>🎶 Nossa Música</h2>
+<button onclick="playMusic()">Tocar Música ❤️</button>
+<audio id="music" src="musica.mp3" loop></audio>
 </div>
 
 <script>
-  /* 🎵 MÚSICA */
-  const music = document.getElementById("music");
-  music.volume = 0.2;
+/* 🎵 Música */
+const music = document.getElementById("music");
+music.volume = 0.2;
+function playMusic(){ music.play(); }
 
-  window.addEventListener("load", () => {
-    music.play().catch(() => {
-      document.body.addEventListener("click", () => music.play(), { once: true });
-    });
-  });
-
-  function playMusic() {
-    music.play();
-  }
-
-  /* ✍️ TEXTO */
-  const text = `
-Meu amor...
-
-Desde o dia em que você entrou na minha vida,
-tudo ganhou mais cor, mais sentido e mais amor.
-
-Você é o meu futuro.
-Eu te amo mais do que palavras conseguem explicar. 💖
-`;
-  let i = 0;
-  const el = document.getElementById("typewriter");
-
-  function typeWriter() {
-    if (i < text.length) {
-      el.innerHTML += text.charAt(i);
-      i++;
-      setTimeout(typeWriter, 80);
-    }
-  }
-  typeWriter();
-
-  /* 💖 CONTADOR */
-<script>
+/* ⏱️ Contador completo */
 function atualizarContador() {
-  const inicio = new Date(2023, 5, 21, 0, 0, 0); // ANO, MÊS-1, DIA
+  const inicio = new Date(2023, 5, 21, 0, 0, 0);
   const agora = new Date();
 
   let anos = agora.getFullYear() - inicio.getFullYear();
@@ -194,10 +119,8 @@ function atualizarContador() {
 
   if (dias < 0) {
     meses--;
-    const ultimoMes = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
-    dias += ultimoMes;
+    dias += new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
   }
-
   if (meses < 0) {
     anos--;
     meses += 12;
@@ -205,7 +128,6 @@ function atualizarContador() {
 
   const diff = agora - inicio;
   const segundosTotais = Math.floor(diff / 1000);
-
   const horas = Math.floor((segundosTotais % 86400) / 3600);
   const minutos = Math.floor((segundosTotais % 3600) / 60);
   const segundos = segundosTotais % 60;
@@ -214,51 +136,43 @@ function atualizarContador() {
     `${anos} anos, ${meses} meses, ${dias} dias<br>
      ${horas} horas, ${minutos} minutos e ${segundos} segundos 💕`;
 }
-
 setInterval(atualizarContador, 1000);
 atualizarContador();
-</script>
 
-  setInterval(atualizarContador, 1000);
-  atualizarContador();
+/* 💬 Mensagens especiais */
+const mensagens = [
+  "Você é o amor da minha vida 💖",
+  "Meu coração é todo seu ❤️",
+  "Eu escolheria você em todas as vidas ✨",
+  "Te amo mais a cada segundo ⏳",
+  "Você é meu lar 🏡❤️"
+];
 
-  /* ❤️ MENSAGENS ESPECIAIS */
-  const mensagens = [
-    "Você é o amor da minha vida 💖",
-    "Meu coração é todo seu ❤️",
-    "Eu escolheria você em todas as vidas ✨",
-    "Te amo mais a cada segundo ⏳",
-    "Você é meu lar 🏡❤️"
-  ];
+function mostrarMensagem() {
+  const msg = document.createElement("div");
+  msg.className = "mensagem";
+  msg.innerText = mensagens[Math.floor(Math.random() * mensagens.length)];
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 3000);
+}
 
-  function mostrarMensagem() {
-    const msg = document.createElement("div");
-    msg.className = "mensagem";
-    msg.innerText = mensagens[Math.floor(Math.random() * mensagens.length)];
-    document.body.appendChild(msg);
-    setTimeout(() => msg.remove(), 3000);
-  }
+/* ❤️ Corações clicáveis */
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 20 + 20 + "px";
+  heart.onclick = () => {
+    mostrarMensagem();
+    heart.remove();
+  };
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}
 
-  /* ❤️ CORAÇÕES CLICÁVEIS */
-  function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 20 + 15 + "px";
-
-    heart.onclick = () => {
-      mostrarMensagem();
-      heart.remove();
-    };
-
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
-  }
-
-  setInterval(createHeart, 400);
+setInterval(createHeart, 500);
 </script>
 
 </body>
 </html>
-
