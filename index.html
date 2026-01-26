@@ -78,16 +78,25 @@
       }
     }
 
-    .gallery img {
-      width: 100%;
-      border-radius: 15px;
-      margin-bottom: 10px;
-      transition: transform 0.4s ease;
-    }
+    .gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
 
-    .gallery img:hover {
-      transform: scale(1.05);
-    }
+.gallery img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 15px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
 
     button {
       background: linear-gradient(135deg, #ff2f92, #6005f3);
@@ -297,3 +306,4 @@ Eu te amo mais do que palavras conseguem explicar 💖`;
 </body>
 
 </html>
+
