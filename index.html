@@ -183,19 +183,41 @@ Eu te amo mais do que palavras conseguem explicar. 💖
   typeWriter();
 
   /* 💖 CONTADOR */
-  function atualizarContador() {
-    const inicio = new Date(2023, 5, 21);
-    const agora = new Date();
-    const diff = agora - inicio;
+<script>
+function atualizarContador() {
+  const inicio = new Date(2023, 5, 21, 0, 0, 0); // ANO, MÊS-1, DIA
+  const agora = new Date();
 
-    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutos = Math.floor((diff / (1000 * 60)) % 60);
-    const segundos = Math.floor((diff / 1000) % 60);
+  let anos = agora.getFullYear() - inicio.getFullYear();
+  let meses = agora.getMonth() - inicio.getMonth();
+  let dias = agora.getDate() - inicio.getDate();
 
-    document.getElementById("tempo").innerHTML =
-      `${dias} dias<br>${horas}h ${minutos}m ${segundos}s 💕`;
+  if (dias < 0) {
+    meses--;
+    const ultimoMes = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
+    dias += ultimoMes;
   }
+
+  if (meses < 0) {
+    anos--;
+    meses += 12;
+  }
+
+  const diff = agora - inicio;
+  const segundosTotais = Math.floor(diff / 1000);
+
+  const horas = Math.floor((segundosTotais % 86400) / 3600);
+  const minutos = Math.floor((segundosTotais % 3600) / 60);
+  const segundos = segundosTotais % 60;
+
+  document.getElementById("tempo").innerHTML =
+    `${anos} anos, ${meses} meses, ${dias} dias<br>
+     ${horas} horas, ${minutos} minutos e ${segundos} segundos 💕`;
+}
+
+setInterval(atualizarContador, 1000);
+atualizarContador();
+</script>
 
   setInterval(atualizarContador, 1000);
   atualizarContador();
@@ -239,3 +261,4 @@ Eu te amo mais do que palavras conseguem explicar. 💖
 
 </body>
 </html>
+
