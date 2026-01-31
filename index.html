@@ -19,7 +19,6 @@
       position: relative;
     }
 
-    /* 🌫️ TEXTURA REALISTA (GRÃO) */
     body::after {
       content: "";
       position: fixed;
@@ -67,24 +66,13 @@
       50% { transform: translateY(-6px); }
     }
 
-    /* 🖼️ GALERIA 2x2 */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .gallery img {
+    /* Slideshow */
+    .slideshow img {
       width: 100%;
       height: 180px;
       object-fit: cover;
       border-radius: 15px;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-
-    .gallery img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      transition: opacity 1s ease-in-out;
     }
 
     button {
@@ -102,7 +90,6 @@
       transform: scale(1.08);
     }
 
-    /* ❤️ CORAÇÕES */
     .heart {
       position: fixed;
       bottom: -20px;
@@ -117,7 +104,6 @@
       to { transform: translateY(-110vh); opacity: 0; }
     }
 
-    /* 💬 MENSAGEM */
     .mensagem {
       position: fixed;
       top: 50%;
@@ -160,11 +146,8 @@
 
 <div class="card">
   <h2>📸 EU TE AMO</h2>
-  <div class="gallery">
-    <img src="./meuamor/foto1.jpg">
-    <img src="./meuamor/foto2.jpg">
-    <img src="./meuamor/foto3.jpg">
-    <img src="./meuamor/foto4.jpg">
+  <div class="slideshow">
+    <img id="slide" src="./meuamor/foto1.jpg" alt="Foto do amor">
   </div>
 </div>
 
@@ -179,7 +162,7 @@
 </div>
 
 <div class="card">
-  <h2>🎶 Clique na tela🤍</h2>
+  <h2>🎶 Clique na tela ou espere 🤍</h2>
   <button onclick="playMusic()">Tocar Música ❤️</button>
   <audio id="music" src="nova-musica.mp3" loop></audio>
 </div>
@@ -196,9 +179,10 @@ window.addEventListener("load", () => {
 
 function playMusic() { music.play(); }
 
+// Typewriter
 const text = `Meu amor...
 
-Hoje é um dos momentos mais especiais para mim, pois hoje você completa mais um ano de vida. Mais um ano ao seu lado me faz muito feliz, e sou grato por ter você em minha vida. Cada momento ao seu lado se torna inesquecível.
+Meu amor, hoje é um dos momentos mais especiais para mim, pois hoje você completa mais um ano de vida. Mais um ano ao seu lado me faz muito feliz, e sou grato por ter você em minha vida. Cada momento ao seu lado se torna inesquecível.
 
 Sou grato a Deus pelo privilégio de poder te chamar de MINHA NOIVA. Eu te parabenizo neste momento tão especial e te agradeço por ser essa mulher incrível que você é, por estar presente, me ajudando, me auxiliando e me dando forças para correr atrás dos nossos objetivos.
 
@@ -215,7 +199,7 @@ function typeWriter() {
 }
 typeWriter();
 
-/* 💖 CONTADOR */
+// Contador
 function atualizarContador() {
   const inicio = new Date(2023, 5, 21, 0, 0, 0);
   const agora = new Date();
@@ -246,7 +230,7 @@ function atualizarContador() {
 setInterval(atualizarContador, 1000);
 atualizarContador();
 
-/* ❤️ CORAÇÕES + MENSAGENS */
+// Corações + Mensagens
 const mensagens = [
   "Você é o amor da minha vida 💖",
   "Meu coração é todo seu ❤️",
@@ -276,13 +260,32 @@ function createHeart() {
 }
 
 setInterval(createHeart, 450);
+
+// Slideshow automático
+const fotos = [
+  "./meuamor/foto1.jpg",
+  "./meuamor/foto2.jpg",
+  "./meuamor/foto3.jpg",
+  "./meuamor/foto4.jpg",
+  "./meuamor/foto5.jpg",
+  "./meuamor/foto6.jpg"
+];
+
+let index = 0;
+const slide = document.getElementById("slide");
+
+function trocarFoto() {
+  index++;
+  if(index >= fotos.length) index = 0;
+  slide.style.opacity = 0;
+  setTimeout(() => {
+    slide.src = fotos[index];
+    slide.style.opacity = 1;
+  }, 500);
+}
+
+setInterval(trocarFoto, 3000);
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
