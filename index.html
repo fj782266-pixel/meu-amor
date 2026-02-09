@@ -91,41 +91,6 @@
       transform: scale(1.08);
     }
 
-    .heart {
-      position: fixed;
-      bottom: -20px;
-      animation: float 6s linear forwards;
-      cursor: pointer;
-      filter: drop-shadow(0 0 10px rgba(255,47,146,0.9));
-      user-select: none;
-    }
-
-    @keyframes float {
-      from { transform: translateY(0); opacity: 1; }
-      to { transform: translateY(-110vh); opacity: 0; }
-    }
-
-    .mensagem {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0,0,0,0.85);
-      padding: 20px 30px;
-      border-radius: 25px;
-      font-size: 1.3em;
-      animation: fade 3s forwards;
-      z-index: 999;
-      box-shadow: 0 0 30px rgba(255,47,146,0.7);
-    }
-
-    @keyframes fade {
-      0% { opacity: 0; transform: translate(-50%, -65%); }
-      20% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { opacity: 0; transform: translate(-50%, -85%); }
-    }
-
     /* INTRO */
     #intro {
       position: fixed;
@@ -148,27 +113,11 @@
       box-shadow: 0 15px 40px rgba(0,0,0,0.35);
       animation: floatCard 5s ease-in-out infinite;
     }
-
-    .intro-content h1 {
-      font-size: 2.2em;
-      margin-bottom: 15px;
-    }
-
-    .intro-content p {
-      font-size: 1.1em;
-      margin-bottom: 25px;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
   </style>
 </head>
 
 <body>
 
-<!-- INTRO -->
 <div id="intro">
   <div class="intro-content">
     <h1>💖 Para o Amor da Minha Vida 💖</h1>
@@ -180,7 +129,6 @@
   </div>
 </div>
 
-<!-- SITE -->
 <div id="site" style="display:none;">
 
 <h1>💖 Para Você, Meu Amor 💖</h1>
@@ -198,52 +146,15 @@
   <p id="typewriter"></p>
 </div>
 
-<div class="card">
-  <h2>📸 EU TE AMO</h2>
-  <div class="slideshow">
-    <img id="slide" src="./meuamor/foto1.jpg">
-  </div>
-</div>
-
-<div class="card">
-  <h2>🎥 Um dos melhores momentos contigo</h2>
-  <video controls playsinline style="width:100%; border-radius:20px;">
-    <source src="./video.mp4" type="video/mp4">
-  </video>
-
-  <h3>💖 Nosso tempo juntos 💖</h3>
-  <p id="tempo"></p>
-</div>
-
-<div class="card">
-  <h2>🎶 Clique na tela 🤍</h2>
-  <button onclick="playMusic()">Tocar Música ❤️</button>
-  <audio id="music" src="nova-musica.mp3" loop></audio>
-</div>
-
 </div>
 
 <script>
-const music = document.getElementById("music");
-music.volume = 0.2;
-
-function playMusic() { music.play(); }
-
 function startSite() {
-  const intro = document.getElementById("intro");
-  const site = document.getElementById("site");
-
-  intro.style.transition = "opacity 1.2s ease";
-  intro.style.opacity = 0;
-
-  setTimeout(() => {
-    intro.style.display = "none";
-    site.style.display = "block";
-    site.style.animation = "fadeIn 1.5s ease";
-  }, 1200);
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("site").style.display = "block";
 }
 
-// Typewriter
+// TYPEWRITER EMOCIONAL (única mudança)
 const text = `Meu amor...
 
 Meu amor, hoje é um dos momentos mais especiais para mim, pois hoje você completa mais um ano de vida. Mais um ano ao seu lado me faz muito feliz, e sou grato por ter você em minha vida. Cada momento ao seu lado se torna inesquecível.
@@ -258,8 +169,16 @@ const el = document.getElementById("typewriter");
 function typeWriter() {
   if (i < text.length) {
     el.innerHTML += text.charAt(i);
+
+    let delay = 70;
+
+    if (text.charAt(i) === "\n") delay = 500;
+    if (el.innerHTML.endsWith("Meu amor...")) delay = 1200;
+    if (el.innerHTML.endsWith("MINHA NOIVA")) delay = 1500;
+    if (el.innerHTML.endsWith("Meu amor, eu te amo!")) delay = 2000;
+
     i++;
-    setTimeout(typeWriter, 70);
+    setTimeout(typeWriter, delay);
   }
 }
 typeWriter();
