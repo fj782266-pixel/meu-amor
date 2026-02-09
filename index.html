@@ -1,187 +1,228 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-  <meta charset="UTF-8">
-  <title>Para o Amor da Minha Vida 💖</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Para o Amor da Minha Vida 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #6005f3, #ffc371);
-      background-size: 400% 400%;
-      animation: bgMove 12s ease infinite;
-      color: white;
-      text-align: center;
-      overflow-x: hidden;
-      position: relative;
-    }
+<style>
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#6005f3,#ffc371);
+background-size:400% 400%;
+animation:bgMove 12s ease infinite;
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
 
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: -1;
-    }
+@keyframes bgMove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
 
-    @keyframes bgMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+.card{
+background:rgba(255,255,255,.18);
+margin:20px;
+padding:20px;
+border-radius:22px;
+backdrop-filter:blur(12px);
+box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
 
-    h1 {
-      margin-top: 30px;
-      font-size: 2.3em;
-      text-shadow: 0 0 20px rgba(255,255,255,0.6);
-      animation: glow 3s infinite;
-    }
+.slideshow img{
+width:100%;
+max-height:400px;
+border-radius:15px;
+transition:opacity 1s;
+}
 
-    @keyframes glow {
-      0%,100% { text-shadow: 0 0 10px rgba(255,255,255,0.4); }
-      50% { text-shadow: 0 0 25px rgba(255,255,255,0.9); }
-    }
+button{
+background:linear-gradient(135deg,#ff2f92,#6005f3);
+border:none;
+padding:15px 28px;
+color:white;
+border-radius:30px;
+cursor:pointer;
+}
 
-    p {
-      font-size: 1.15em;
-      padding: 0 20px;
-    }
+.heart{
+position:fixed;
+bottom:-20px;
+animation:float 6s linear forwards;
+cursor:pointer;
+}
 
-    .card {
-      background: rgba(255,255,255,0.18);
-      margin: 20px;
-      padding: 20px;
-      border-radius: 22px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-      animation: floatCard 6s ease-in-out infinite;
-    }
+@keyframes float{
+to{transform:translateY(-110vh);opacity:0}
+}
 
-    @keyframes floatCard {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
+.mensagem{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:rgba(0,0,0,.85);
+padding:20px 30px;
+border-radius:25px;
+animation:fade 3s forwards;
+}
 
-    .slideshow img {
-      width: 100%;
-      height: auto;
-      max-height: 400px;
-      border-radius: 15px;
-      transition: opacity 1s ease-in-out;
-      display: block;
-      margin: 0 auto;
-    }
+@keyframes fade{
+0%{opacity:0}
+20%{opacity:1}
+80%{opacity:1}
+100%{opacity:0}
+}
 
-    button {
-      background: linear-gradient(135deg, #ff2f92, #6005f3);
-      border: none;
-      padding: 15px 28px;
-      color: white;
-      font-size: 1em;
-      border-radius: 30px;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    }
+#intro{
+position:fixed;
+inset:0;
+background:linear-gradient(135deg,#6005f3,#ff2f92);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
 
-    button:hover {
-      transform: scale(1.08);
-    }
+.intro-content{
+background:rgba(255,255,255,.18);
+padding:30px;
+border-radius:25px;
+}
 
-    /* INTRO */
-    #intro {
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(135deg, #6005f3, #ff2f92);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      animation: bgMove 12s ease infinite;
-    }
-
-    .intro-content {
-      text-align: center;
-      max-width: 500px;
-      padding: 30px;
-      background: rgba(255,255,255,0.18);
-      border-radius: 25px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.35);
-      animation: floatCard 5s ease-in-out infinite;
-    }
-  </style>
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
+}
+</style>
 </head>
 
 <body>
 
 <div id="intro">
-  <div class="intro-content">
-    <h1>💖 Para o Amor da Minha Vida 💖</h1>
-    <p>
-      Esse site guarda sentimentos que não cabem em palavras.<br>
-      Clique quando estiver pronta 🤍
-    </p>
-    <button onclick="startSite()">Começar nossa história 💕</button>
-  </div>
+<div class="intro-content">
+<h1>💖 Para o Amor da Minha Vida 💖</h1>
+<p>Clique quando estiver pronta 🤍</p>
+<button onclick="startSite()">Começar 💕</button>
+</div>
 </div>
 
-<div id="site" style="display:none;">
+<div id="site" style="display:none">
 
 <h1>💖 Para Você, Meu Amor 💖</h1>
 
 <div class="card">
-  <p>
-    Meu amor, hoje você completa 18 anos.<br>
-    Obrigado por existir e por me fazer tão feliz.<br>
-    Feliz aniversário, minha noiva linda 💕
-  </p>
+<p>Feliz aniversário, minha noiva linda 💕</p>
 </div>
 
 <div class="card">
-  <h2>💌 Uma carta só pra você</h2>
-  <p id="typewriter"></p>
+<h2>💌 Uma carta só pra você</h2>
+<p id="typewriter"></p>
+</div>
+
+<div class="card">
+<h2>📸 EU TE AMO</h2>
+<div class="slideshow">
+<img id="slide" src="./meuamor/foto1.jpg">
+</div>
+</div>
+
+<div class="card">
+<h2>🎥 Um dos melhores momentos contigo</h2>
+<video controls style="width:100%;border-radius:20px">
+<source src="./video.mp4" type="video/mp4">
+</video>
+<h3>💖 Nosso tempo juntos 💖</h3>
+<p id="tempo"></p>
+</div>
+
+<div class="card">
+<button onclick="playMusic()">Tocar Música ❤️</button>
+<audio id="music" src="nova-musica.mp3" loop></audio>
 </div>
 
 </div>
 
 <script>
-function startSite() {
-  document.getElementById("intro").style.display = "none";
-  document.getElementById("site").style.display = "block";
+const music=document.getElementById("music");
+music.volume=0.2;
+function playMusic(){music.play()}
+
+function startSite(){
+intro.style.opacity=0;
+setTimeout(()=>{
+intro.style.display="none";
+site.style.display="block";
+site.style.animation="fadeIn 1.5s";
+},1200);
 }
 
-// TYPEWRITER EMOCIONAL (única mudança)
-const text = `Meu amor...
+/* TYPEWRITER EMOCIONAL */
+const text=`Meu amor...
 
-Meu amor, hoje é um dos momentos mais especiais para mim, pois hoje você completa mais um ano de vida. Mais um ano ao seu lado me faz muito feliz, e sou grato por ter você em minha vida. Cada momento ao seu lado se torna inesquecível.
+Meu amor, hoje é um dos momentos mais especiais para mim.
 
-Sou grato a Deus pelo privilégio de poder te chamar de MINHA NOIVA. Eu te parabenizo neste momento tão especial e te agradeço por ser essa mulher incrível que você é, por estar presente, me ajudando, me auxiliando e me dando forças para correr atrás dos nossos objetivos.
+Sou grato a Deus pelo privilégio de poder te chamar de MINHA NOIVA.
 
-Meu amor, eu te amo! Você é a mulher da minha vida. Obrigado por tudo. Feliz aniversário, minha vida, 18tão da minha princesa 😍🤍💖`;
+Meu amor, eu te amo! Você é a mulher da minha vida.`;
 
-let i = 0;
-const el = document.getElementById("typewriter");
+let i=0;
+const el=document.getElementById("typewriter");
 
-function typeWriter() {
-  if (i < text.length) {
-    el.innerHTML += text.charAt(i);
+function typeWriter(){
+if(i<text.length){
+el.innerHTML+=text.charAt(i);
 
-    let delay = 70;
+let delay=70;
+if(text.charAt(i)==="\n") delay=800;
+if(text.substr(i,11)==="MINHA NOIVA") delay=1200;
+if(text.substr(i,9)==="eu te amo") delay=1200;
 
-    if (text.charAt(i) === "\n") delay = 500;
-    if (el.innerHTML.endsWith("Meu amor...")) delay = 1200;
-    if (el.innerHTML.endsWith("MINHA NOIVA")) delay = 1500;
-    if (el.innerHTML.endsWith("Meu amor, eu te amo!")) delay = 2000;
-
-    i++;
-    setTimeout(typeWriter, delay);
-  }
-}
+i++;
+setTimeout(typeWriter,delay);
+}}
 typeWriter();
+
+/* CONTADOR */
+function atualizar(){
+const inicio=new Date(2023,5,21);
+const agora=new Date();
+const diff=agora-inicio;
+const dias=Math.floor(diff/(1000*60*60*24));
+document.getElementById("tempo").innerHTML=`${dias} dias juntos 💕`;
+}
+setInterval(atualizar,1000);
+atualizar();
+
+/* SLIDES */
+const fotos=["./meuamor/foto1.jpg","./meuamor/foto2.jpg","./meuamor/foto3.jpg"];
+let idx=0;
+setInterval(()=>{
+idx=(idx+1)%fotos.length;
+slide.style.opacity=0;
+setTimeout(()=>{slide.src=fotos[idx];slide.style.opacity=1},500);
+},3000);
+
+/* CORAÇÕES */
+const msgs=["Te amo 💖","Meu lar ❤️","Pra sempre nós ✨"];
+setInterval(()=>{
+const h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+h.onclick=()=>{
+const m=document.createElement("div");
+m.className="mensagem";
+m.innerText=msgs[Math.floor(Math.random()*msgs.length)];
+document.body.appendChild(m);
+setTimeout(()=>m.remove(),3000);
+};
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},500);
 </script>
 
 </body>
