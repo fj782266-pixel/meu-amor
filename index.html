@@ -66,11 +66,10 @@
       50% { transform: translateY(-6px); }
     }
 
-    /* Slideshow */
     .slideshow img {
       width: 100%;
-      height: auto;       /* mantém proporção */
-      max-height: 400px;  /* altura máxima */
+      height: auto;
+      max-height: 400px;
       border-radius: 15px;
       transition: opacity 1s ease-in-out;
       display: block;
@@ -126,10 +125,63 @@
       80% { opacity: 1; }
       100% { opacity: 0; transform: translate(-50%, -85%); }
     }
+
+    /* INTRO */
+    #intro {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #6005f3, #ff2f92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      animation: bgMove 12s ease infinite;
+    }
+
+    .intro-content {
+      text-align: center;
+      max-width: 500px;
+      padding: 30px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 25px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+      animation: floatCard 5s ease-in-out infinite;
+    }
+
+    .intro-content h1 {
+      font-size: 2.2em;
+      margin-bottom: 15px;
+    }
+
+    .intro-content p {
+      font-size: 1.1em;
+      margin-bottom: 25px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 
 <body>
+
+<!-- INTRO -->
+<div id="intro">
+  <div class="intro-content">
+    <h1>💖 Para o Amor da Minha Vida 💖</h1>
+    <p>
+      Esse site guarda sentimentos que não cabem em palavras.<br>
+      Clique quando estiver pronta 🤍
+    </p>
+    <button onclick="startSite()">Começar nossa história 💕</button>
+  </div>
+</div>
+
+<!-- SITE -->
+<div id="site" style="display:none;">
 
 <h1>💖 Para Você, Meu Amor 💖</h1>
 
@@ -149,7 +201,7 @@
 <div class="card">
   <h2>📸 EU TE AMO</h2>
   <div class="slideshow">
-    <img id="slide" src="./meuamor/foto1.jpg" alt="Foto do amor">
+    <img id="slide" src="./meuamor/foto1.jpg">
   </div>
 </div>
 
@@ -169,18 +221,27 @@
   <audio id="music" src="nova-musica.mp3" loop></audio>
 </div>
 
+</div>
+
 <script>
 const music = document.getElementById("music");
 music.volume = 0.2;
 
-// autoplay tentativa
-window.addEventListener("load", () => {
-  music.play().catch(() => {
-    document.body.addEventListener("click", () => music.play(), { once: true });
-  });
-});
-
 function playMusic() { music.play(); }
+
+function startSite() {
+  const intro = document.getElementById("intro");
+  const site = document.getElementById("site");
+
+  intro.style.transition = "opacity 1.2s ease";
+  intro.style.opacity = 0;
+
+  setTimeout(() => {
+    intro.style.display = "none";
+    site.style.display = "block";
+    site.style.animation = "fadeIn 1.5s ease";
+  }, 1200);
+}
 
 // Typewriter
 const text = `Meu amor...
@@ -190,6 +251,7 @@ Meu amor, hoje é um dos momentos mais especiais para mim, pois hoje você compl
 Sou grato a Deus pelo privilégio de poder te chamar de MINHA NOIVA. Eu te parabenizo neste momento tão especial e te agradeço por ser essa mulher incrível que você é, por estar presente, me ajudando, me auxiliando e me dando forças para correr atrás dos nossos objetivos.
 
 Meu amor, eu te amo! Você é a mulher da minha vida. Obrigado por tudo. Feliz aniversário, minha vida, 18tão da minha princesa 😍🤍💖`;
+
 let i = 0;
 const el = document.getElementById("typewriter");
 
@@ -201,95 +263,7 @@ function typeWriter() {
   }
 }
 typeWriter();
-
-// Contador
-function atualizarContador() {
-  const inicio = new Date(2023, 5, 21, 0, 0, 0);
-  const agora = new Date();
-
-  let anos = agora.getFullYear() - inicio.getFullYear();
-  let meses = agora.getMonth() - inicio.getMonth();
-  let dias = agora.getDate() - inicio.getDate();
-
-  if (dias < 0) {
-    meses--;
-    dias += new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
-  }
-  if (meses < 0) {
-    anos--;
-    meses += 12;
-  }
-
-  const diff = agora - inicio;
-  const horas = Math.floor((diff / (1000*60*60)) % 24);
-  const minutos = Math.floor((diff / (1000*60)) % 60);
-  const segundos = Math.floor((diff / 1000) % 60);
-
-  document.getElementById("tempo").innerHTML =
-    `${anos} anos, ${meses} meses, ${dias} dias<br>
-     ${horas} horas, ${minutos} minutos e ${segundos} segundos 💕`;
-}
-
-setInterval(atualizarContador, 1000);
-atualizarContador();
-
-// Corações + Mensagens
-const mensagens = [
-  "Você é o amor da minha vida 💖",
-  "Meu coração é todo seu ❤️",
-  "Eu escolheria você em todas as vidas ✨",
-  "Te amo mais a cada segundo ⏳",
-  "Você é meu lar 🏡❤️",
-  "Você é minha motivação❤️"
-];
-
-function mostrarMensagem() {
-  const msg = document.createElement("div");
-  msg.className = "mensagem";
-  msg.innerText = mensagens[Math.floor(Math.random() * mensagens.length)];
-  document.body.appendChild(msg);
-  setTimeout(() => msg.remove(), 3000);
-}
-
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = Math.random() * 20 + 18 + "px";
-  heart.onclick = () => { mostrarMensagem(); heart.remove(); };
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 6000);
-}
-
-setInterval(createHeart, 450);
-
-// Slideshow automático
-const fotos = [
-  "./meuamor/foto1.jpg",
-  "./meuamor/foto2.jpg",
-  "./meuamor/foto3.jpg",
-  "./meuamor/foto4.jpg",
-  "./meuamor/foto5.jpg",
-  "./meuamor/foto6.jpg"
-];
-
-let index = 0;
-const slide = document.getElementById("slide");
-
-function trocarFoto() {
-  index++;
-  if(index >= fotos.length) index = 0;
-  slide.style.opacity = 0;
-  setTimeout(() => {
-    slide.src = fotos[index];
-    slide.style.opacity = 1;
-  }, 500);
-}
-
-setInterval(trocarFoto, 3000);
 </script>
 
 </body>
 </html>
-
