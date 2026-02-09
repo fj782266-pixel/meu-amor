@@ -147,10 +147,43 @@ to{opacity:1;transform:translateY(0)}
 </div>
 
 <script>
-const music=document.getElementById("music");
-music.volume=0.2;
-function playMusic(){music.play()}
+/* 🎵 MÚSICA COM FADE IN / FADE OUT */
+const music = document.getElementById("music");
+music.volume = 0;
 
+let fadeInterval = null;
+
+function fadeInMusic(){
+  clearInterval(fadeInterval);
+  fadeInterval = setInterval(() => {
+    if (music.volume < 0.2) {
+      music.volume = Math.min(music.volume + 0.01, 0.2);
+    } else {
+      clearInterval(fadeInterval);
+    }
+  }, 150);
+}
+
+function fadeOutMusic(){
+  clearInterval(fadeInterval);
+  fadeInterval = setInterval(() => {
+    if (music.volume > 0) {
+      music.volume = Math.max(music.volume - 0.01, 0);
+    } else {
+      music.pause();
+      clearInterval(fadeInterval);
+    }
+  }, 150);
+}
+
+function playMusic(){
+  music.play();
+  fadeInMusic();
+}
+
+music.addEventListener("pause", fadeOutMusic);
+
+/* INTRO */
 function startSite(){
 intro.style.opacity=0;
 setTimeout(()=>{
@@ -179,7 +212,7 @@ el.innerHTML+=text.charAt(i);
 let delay=70;
 if(text.charAt(i)==="\n") delay=800;
 if(text.substr(i,11)==="MINHA NOIVA") delay=1200;
-if(text.substr(i,9)==="eu te amo") delay=1200;
+if(text.substr(i,9).toLowerCase()==="eu te amo") delay=1200;
 
 i++;
 setTimeout(typeWriter,delay);
