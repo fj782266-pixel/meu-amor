@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -147,11 +147,12 @@ to{opacity:1;transform:translateY(0)}
 </div>
 
 <script>
-/* 🎵 MÚSICA COM FADE IN / FADE OUT */
+/* 🎵 MÚSICA COM FADE */
 const music = document.getElementById("music");
 music.volume = 0;
 
 let fadeInterval = null;
+let musicStarted = false;
 
 function fadeInMusic(){
   clearInterval(fadeInterval);
@@ -164,27 +165,22 @@ function fadeInMusic(){
   }, 150);
 }
 
-function fadeOutMusic(){
-  clearInterval(fadeInterval);
-  fadeInterval = setInterval(() => {
-    if (music.volume > 0) {
-      music.volume = Math.max(music.volume - 0.01, 0);
-    } else {
-      music.pause();
-      clearInterval(fadeInterval);
-    }
-  }, 150);
-}
-
 function playMusic(){
-  music.play();
-  fadeInMusic();
+  if(!musicStarted){
+    music.play();
+    fadeInMusic();
+    musicStarted = true;
+  }
 }
 
-music.addEventListener("pause", fadeOutMusic);
+/* tocar ao clicar em qualquer lugar */
+document.addEventListener("click", playMusic);
 
 /* INTRO */
 function startSite(){
+const intro = document.getElementById("intro");
+const site = document.getElementById("site");
+
 intro.style.opacity=0;
 setTimeout(()=>{
 intro.style.display="none";
@@ -193,7 +189,7 @@ site.style.animation="fadeIn 1.5s";
 },1200);
 }
 
-/* TYPEWRITER EMOCIONAL */
+/* TYPEWRITER */
 const text=`Meu amor...
 
 hoje é o dia mais especial da minha vida, pois foi o dia em que minha linda princesa veio ao mundo. Sou grato a Deus pelo privilégio de ter você ao meu lado.
@@ -211,30 +207,42 @@ const el=document.getElementById("typewriter");
 function typeWriter(){
 if(i<text.length){
 el.innerHTML+=text.charAt(i);
-
-let delay=70;
-if(text.charAt(i)==="\n") delay=800;
-if(text.substr(i,11)==="MINHA NOIVA") delay=1200;
-if(text.substr(i,9).toLowerCase()==="eu te amo") delay=1200;
-
 i++;
-setTimeout(typeWriter,delay);
+setTimeout(typeWriter,70);
 }}
 typeWriter();
 
-/* CONTADOR */
+/* CONTADOR COMPLETO */
 function atualizar(){
-const inicio=new Date(2023,5,21);
-const agora=new Date();
-const diff=agora-inicio;
-const dias=Math.floor(diff/(1000*60*60*24));
-document.getElementById("tempo").innerHTML=`${dias} dias juntos 💕`;
+  const inicio = new Date(2023, 5, 21, 0, 0, 0);
+  const agora = new Date();
+
+  let anos = agora.getFullYear() - inicio.getFullYear();
+  let meses = agora.getMonth() - inicio.getMonth();
+  let dias = agora.getDate() - inicio.getDate();
+  let horas = agora.getHours() - inicio.getHours();
+  let minutos = agora.getMinutes() - inicio.getMinutes();
+  let segundos = agora.getSeconds() - inicio.getSeconds();
+
+  if (segundos < 0) { segundos += 60; minutos--; }
+  if (minutos < 0) { minutos += 60; horas--; }
+  if (horas < 0) { horas += 24; dias--; }
+  if (dias < 0) {
+    meses--;
+    const ultimoMes = new Date(agora.getFullYear(), agora.getMonth(), 0);
+    dias += ultimoMes.getDate();
+  }
+  if (meses < 0) { meses += 12; anos--; }
+
+  document.getElementById("tempo").innerHTML =
+    `${anos} anos, ${meses} meses, ${dias} dias<br>
+     ${horas} horas, ${minutos} minutos e ${segundos} segundos 💕`;
 }
 setInterval(atualizar,1000);
 atualizar();
 
 /* SLIDES */
-const fotos=["./meuamor/foto1.jpg","./meuamor/foto2.jpg","./meuamor/foto3.jpg", "./meuamor/foto4.jpg", "./meuamor/foto5.jpg", "./meuamor/foto6.jpg", "./meuamor/foto7.jpg"];
+const fotos=["./meuamor/foto1.jpg","./meuamor/foto2.jpg","./meuamor/foto3.jpg","./meuamor/foto4.jpg","./meuamor/foto5.jpg","./meuamor/foto6.jpg","./meuamor/foto7.jpg"];
 let idx=0;
 setInterval(()=>{
 idx=(idx+1)%fotos.length;
@@ -263,6 +271,3 @@ setTimeout(()=>h.remove(),6000);
 
 </body>
 </html>
-
-
-
