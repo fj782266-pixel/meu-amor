@@ -142,43 +142,45 @@ to{opacity:1;transform:translateY(0)}
 <div class="card">
 <button onclick="playMusic()">Tocar Música ❤️</button>
 <audio id="music" src="nova-musica.mp3" loop></audio>
+<audio id="typingSound" src="keyboard.mp3"></audio>
 </div>
 
 </div>
 
 <script>
-/* 🎵 MÚSICA COM FADE IN / FADE OUT */
+
+/* 🎵 MÚSICA */
 const music = document.getElementById("music");
 music.volume = 0;
 
 let fadeInterval = null;
 
 function fadeInMusic(){
-  clearInterval(fadeInterval);
-  fadeInterval = setInterval(() => {
-    if (music.volume < 0.2) {
-      music.volume = Math.min(music.volume + 0.01, 0.2);
-    } else {
-      clearInterval(fadeInterval);
-    }
-  }, 150);
+clearInterval(fadeInterval);
+fadeInterval = setInterval(() => {
+if (music.volume < 0.2) {
+music.volume = Math.min(music.volume + 0.01, 0.2);
+} else {
+clearInterval(fadeInterval);
+}
+}, 150);
 }
 
 function fadeOutMusic(){
-  clearInterval(fadeInterval);
-  fadeInterval = setInterval(() => {
-    if (music.volume > 0) {
-      music.volume = Math.max(music.volume - 0.01, 0);
-    } else {
-      music.pause();
-      clearInterval(fadeInterval);
-    }
-  }, 150);
+clearInterval(fadeInterval);
+fadeInterval = setInterval(() => {
+if (music.volume > 0) {
+music.volume = Math.max(music.volume - 0.01, 0);
+} else {
+music.pause();
+clearInterval(fadeInterval);
+}
+}, 150);
 }
 
 function playMusic(){
-  music.play();
-  fadeInMusic();
+music.play();
+fadeInMusic();
 }
 
 music.addEventListener("pause", fadeOutMusic);
@@ -193,7 +195,11 @@ site.style.animation="fadeIn 1.5s";
 },1200);
 }
 
-/* TYPEWRITER EMOCIONAL */
+/* 🔊 SOM DE DIGITAÇÃO */
+const typingSound = document.getElementById("typingSound");
+typingSound.volume = 0.2;
+
+/* TYPEWRITER */
 const text=`Meu amor...
 
 Meu amor, hoje é um dos momentos mais especiais para mim.
@@ -206,16 +212,23 @@ let i=0;
 const el=document.getElementById("typewriter");
 
 function typeWriter(){
-if(i<text.length){
-el.innerHTML+=text.charAt(i);
+if(i < text.length){
 
-let delay=70;
-if(text.charAt(i)==="\n") delay=800;
-if(text.substr(i,11)==="MINHA NOIVA") delay=1200;
-if(text.substr(i,9).toLowerCase()==="eu te amo") delay=1200;
+el.innerHTML += text.charAt(i);
+
+if(text.charAt(i) !== "\n"){
+typingSound.currentTime = 0;
+typingSound.play();
+}
+
+let delay = 70;
+
+if(text.charAt(i) === "\n") delay = 800;
+if(text.substr(i,11) === "MINHA NOIVA") delay = 1200;
+if(text.substr(i,9).toLowerCase() === "eu te amo") delay = 1200;
 
 i++;
-setTimeout(typeWriter,delay);
+setTimeout(typeWriter, delay);
 }}
 typeWriter();
 
@@ -256,6 +269,7 @@ setTimeout(()=>m.remove(),3000);
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),6000);
 },500);
+
 </script>
 
 </body>
