@@ -200,6 +200,8 @@ const typingSound = document.getElementById("typingSound");
 typingSound.volume = 0.2;
 
 /* TYPEWRITER */
+/* 🔊 TYPEWRITER COM SOM REALISTA */
+
 const text=`Meu amor...
 
 Meu amor, hoje é um dos momentos mais especiais para mim.
@@ -211,15 +213,32 @@ Meu amor, eu te amo! Você é a mulher da minha vida.`;
 let i=0;
 const el=document.getElementById("typewriter");
 
+function playTypingSound(){
+  const sound = new Audio("keyboard.mp3");
+  sound.volume = 0.15;
+  sound.play();
+}
+
 function typeWriter(){
 if(i < text.length){
 
 el.innerHTML += text.charAt(i);
 
-if(text.charAt(i) !== "\n"){
-typingSound.currentTime = 0;
-typingSound.play();
+if(text.charAt(i) !== "\n" && text.charAt(i) !== " "){
+playTypingSound();
 }
+
+let delay = 70;
+
+if(text.charAt(i) === "\n") delay = 800;
+if(text.substr(i,11) === "MINHA NOIVA") delay = 1200;
+if(text.substr(i,9).toLowerCase() === "eu te amo") delay = 1200;
+
+i++;
+setTimeout(typeWriter, delay);
+}}
+typeWriter();
+
 
 let delay = 70;
 
@@ -274,3 +293,4 @@ setTimeout(()=>h.remove(),6000);
 
 </body>
 </html>
+
