@@ -142,7 +142,6 @@ to{opacity:1;transform:translateY(0)}
 <div class="card">
 <button onclick="playMusic()">Tocar Música ❤️</button>
 <audio id="music" src="nova-musica.mp3" loop></audio>
-<audio id="typingSound" src="keyboard.mp3"></audio>
 </div>
 
 </div>
@@ -195,13 +194,7 @@ site.style.animation="fadeIn 1.5s";
 },1200);
 }
 
-/* 🔊 SOM DE DIGITAÇÃO */
-const typingSound = document.getElementById("typingSound");
-typingSound.volume = 0.2;
-
-/* TYPEWRITER */
-/* 🔊 TYPEWRITER COM SOM REALISTA */
-
+/* 💌 TYPEWRITER COM SOM REALISTA */
 const text=`Meu amor...
 
 Meu amor, hoje é um dos momentos mais especiais para mim.
@@ -227,18 +220,6 @@ el.innerHTML += text.charAt(i);
 if(text.charAt(i) !== "\n" && text.charAt(i) !== " "){
 playTypingSound();
 }
-
-let delay = 70;
-
-if(text.charAt(i) === "\n") delay = 800;
-if(text.substr(i,11) === "MINHA NOIVA") delay = 1200;
-if(text.substr(i,9).toLowerCase() === "eu te amo") delay = 1200;
-
-i++;
-setTimeout(typeWriter, delay);
-}}
-typeWriter();
-
 
 let delay = 70;
 
@@ -293,4 +274,3 @@ setTimeout(()=>h.remove(),6000);
 
 </body>
 </html>
-
