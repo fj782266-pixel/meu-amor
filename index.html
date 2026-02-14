@@ -48,51 +48,6 @@ border-radius:30px;
 cursor:pointer;
 }
 
-.heart{
-position:fixed;
-bottom:-20px;
-animation:float 6s linear forwards;
-cursor:pointer;
-}
-
-@keyframes float{
-to{transform:translateY(-110vh);opacity:0}
-}
-
-.mensagem{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-background:rgba(0,0,0,.85);
-padding:20px 30px;
-border-radius:25px;
-animation:fade 3s forwards;
-}
-
-@keyframes fade{
-0%{opacity:0}
-20%{opacity:1}
-80%{opacity:1}
-100%{opacity:0}
-}
-
-#intro{
-position:fixed;
-inset:0;
-background:linear-gradient(135deg,#6005f3,#ff2f92);
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:9999;
-}
-
-.intro-content{
-background:rgba(255,255,255,.18);
-padding:30px;
-border-radius:25px;
-}
-
 @keyframes fadeIn{
 from{opacity:0;transform:translateY(20px)}
 to{opacity:1;transform:translateY(0)}
@@ -103,7 +58,7 @@ to{opacity:1;transform:translateY(0)}
 <body>
 
 <div id="intro">
-<div class="intro-content">
+<div style="background:rgba(255,255,255,.18);padding:30px;border-radius:25px;">
 <h1>💖 Para o Amor da Minha Vida 💖</h1>
 <p>Clique quando estiver pronta 🤍</p>
 <button onclick="startSite()">Começar 💕</button>
@@ -115,28 +70,8 @@ to{opacity:1;transform:translateY(0)}
 <h1>💖 Para Você, Meu Amor 💖</h1>
 
 <div class="card">
-<p>Feliz aniversário, minha noiva linda 💕</p>
-</div>
-
-<div class="card">
 <h2>💌 Uma carta só pra você</h2>
 <p id="typewriter"></p>
-</div>
-
-<div class="card">
-<h2>📸 EU TE AMO</h2>
-<div class="slideshow">
-<img id="slide" src="./meuamor/foto1.jpg">
-</div>
-</div>
-
-<div class="card">
-<h2>🎥 Um dos melhores momentos contigo</h2>
-<video controls style="width:100%;border-radius:20px">
-<source src="./video.mp4" type="video/mp4">
-</video>
-<h3>💖 Nosso tempo juntos 💖</h3>
-<p id="tempo"></p>
 </div>
 
 <div class="card">
@@ -148,42 +83,6 @@ to{opacity:1;transform:translateY(0)}
 
 <script>
 
-/* 🎵 MÚSICA */
-const music = document.getElementById("music");
-music.volume = 0;
-
-let fadeInterval = null;
-
-function fadeInMusic(){
-clearInterval(fadeInterval);
-fadeInterval = setInterval(() => {
-if (music.volume < 0.2) {
-music.volume = Math.min(music.volume + 0.01, 0.2);
-} else {
-clearInterval(fadeInterval);
-}
-}, 150);
-}
-
-function fadeOutMusic(){
-clearInterval(fadeInterval);
-fadeInterval = setInterval(() => {
-if (music.volume > 0) {
-music.volume = Math.max(music.volume - 0.01, 0);
-} else {
-music.pause();
-clearInterval(fadeInterval);
-}
-}, 150);
-}
-
-function playMusic(){
-music.play();
-fadeInMusic();
-}
-
-music.addEventListener("pause", fadeOutMusic);
-
 /* INTRO */
 function startSite(){
 intro.style.opacity=0;
@@ -194,7 +93,15 @@ site.style.animation="fadeIn 1.5s";
 },1200);
 }
 
-/* 💌 TYPEWRITER COM SOM REALISTA */
+/* MÚSICA */
+const music = document.getElementById("music");
+music.volume = 0.2;
+
+function playMusic(){
+music.play();
+}
+
+/* TYPEWRITER LENTO E ROMÂNTICO */
 const text=`Meu amor...
 
 Meu amor, hoje é um dos momentos mais especiais para mim.
@@ -208,67 +115,37 @@ const el=document.getElementById("typewriter");
 
 function playTypingSound(){
   const sound = new Audio("keyboard.mp3");
-  sound.volume = 0.15;
+  sound.volume = 0.07; // bem suave
   sound.play();
 }
 
 function typeWriter(){
+
 if(i < text.length){
 
-el.innerHTML += text.charAt(i);
+let char = text.charAt(i);
+el.innerHTML += char;
 
-if(text.charAt(i) !== "\n" && text.charAt(i) !== " "){
+// toca som apenas para letras
+if(char !== "\n" && char !== " "){
 playTypingSound();
 }
 
-let delay = 70;
+// velocidade humana lenta
+let delay = Math.random() * 150 + 180; 
+// entre 180ms e 330ms
 
-if(text.charAt(i) === "\n") delay = 800;
-if(text.substr(i,11) === "MINHA NOIVA") delay = 1200;
-if(text.substr(i,9).toLowerCase() === "eu te amo") delay = 1200;
+// pausas dramáticas
+if(char === "\n") delay = 1000;
+if(text.substr(i,11) === "MINHA NOIVA") delay = 1800;
+if(text.substr(i,9).toLowerCase() === "eu te amo") delay = 2200;
 
 i++;
 setTimeout(typeWriter, delay);
-}}
-typeWriter();
-
-/* CONTADOR */
-function atualizar(){
-const inicio=new Date(2023,5,21);
-const agora=new Date();
-const diff=agora-inicio;
-const dias=Math.floor(diff/(1000*60*60*24));
-document.getElementById("tempo").innerHTML=`${dias} dias juntos 💕`;
 }
-setInterval(atualizar,1000);
-atualizar();
+}
 
-/* SLIDES */
-const fotos=["./meuamor/foto1.jpg","./meuamor/foto2.jpg","./meuamor/foto3.jpg"];
-let idx=0;
-setInterval(()=>{
-idx=(idx+1)%fotos.length;
-slide.style.opacity=0;
-setTimeout(()=>{slide.src=fotos[idx];slide.style.opacity=1},500);
-},3000);
-
-/* CORAÇÕES */
-const msgs=["Te amo 💖","Meu lar ❤️","Pra sempre nós ✨"];
-setInterval(()=>{
-const h=document.createElement("div");
-h.className="heart";
-h.innerHTML="❤️";
-h.style.left=Math.random()*100+"vw";
-h.onclick=()=>{
-const m=document.createElement("div");
-m.className="mensagem";
-m.innerText=msgs[Math.floor(Math.random()*msgs.length)];
-document.body.appendChild(m);
-setTimeout(()=>m.remove(),3000);
-};
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),6000);
-},500);
+typeWriter();
 
 </script>
 
